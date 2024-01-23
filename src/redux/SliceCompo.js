@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-
-
     const initialState = {
         arr: [],
     }
@@ -16,7 +14,7 @@ export const SliceCompo = createSlice({
         },
         deleteValue : (state, {payload}) =>{
             console.log(payload)
-            state.arr.splice(payload, payload+1)
+            state.arr.splice(payload, 1)
         },
         updateValue: (state, {payload})=>{
             state.arr[payload.key].inputtxt = payload.inputtxt;
