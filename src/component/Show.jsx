@@ -1,6 +1,16 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import {deleteValue} from '../redux/SliceCompo'
 
-export default function Show({ myArr, deleteData, updateData}) {
+export default function Show({updateData}) {
+
+    const myArr = useSelector((state)=> state.userData.arr )
+    const dispatch = useDispatch();
+
+    const deleteData = (key)=>{
+        dispatch(deleteValue(key))
+    }
+
     return (
         <>
             {myArr && myArr.map((element, key) => {

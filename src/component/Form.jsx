@@ -12,7 +12,7 @@ export default function Form() {
     const [number, setNumber] = useState("")
     
 
-    const myArr = useSelector((state)=> state.userData.arr )
+    
     //console.log(myArr)
     const dispatch = useDispatch()
 
@@ -25,9 +25,7 @@ export default function Form() {
         setEmail("")
         setNumber("")
     }
-    const deleteData = (key)=>{
-        dispatch(deleteValue(key))
-    }
+
     const updateData = (key)=>{
         dispatch(updateValue({key,inputtxt, lastName,address,email,number}))
         setInputtxt("")
@@ -99,7 +97,7 @@ export default function Form() {
                 </form>
             </div>
             <div className="user_content container">
-                <Show myArr = {myArr} deleteData={deleteData} updateData={updateData}/>
+                <Show  updateData={updateData}/>
             </div>
                 
         </>
