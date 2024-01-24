@@ -1,7 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 
     const initialState = {
-        arr: [],
+        arr: {
+            inputtxt:"",
+            lastName:"",
+            address:"",
+            email:"",
+            number:""
+        },
     }
 
 
@@ -10,18 +16,26 @@ export const SliceCompo = createSlice({
     initialState,
     reducers:{
         addValue : (state, {payload})=>{
-            state.arr.push(payload)
+            state.arr.inputtxt = payload.inputtxt
+            state.arr.lastName = payload.lastName
+            state.arr.address = payload.address
+            state.arr.email = payload.email
+            state.arr.number = payload.number
         },
         deleteValue : (state, {payload}) =>{
             console.log(payload)
-            state.arr.splice(payload, 1)
+            state.arr.inputtxt = ""
+            state.arr.lastName = ""
+            state.arr.address = ""
+            state.arr.email = ""
+            state.arr.number = ""
         },
         updateValue: (state, {payload})=>{
-            state.arr[payload.key].inputtxt = payload.inputtxt;
-            state.arr[payload.key].lastName = payload.lastName;
-            state.arr[payload.key].address = payload.address;
-            state.arr[payload.key].email = payload.email;
-            state.arr[payload.key].number = payload.number;
+            state.arr.inputtxt = payload.inputtxt;
+            state.arr.lastName = payload.lastName;
+            state.arr.address = payload.address;
+            state.arr.email = payload.email;
+            state.arr.number = payload.number;
         }
     }
 })

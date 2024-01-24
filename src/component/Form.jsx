@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Show from './Show';
 import { useSelector, useDispatch } from 'react-redux'
-import { addValue, deleteValue, updateValue } from '../redux/SliceCompo';
+import { addValue, updateValue } from '../redux/SliceCompo';
 
 export default function Form() {
 
@@ -12,6 +12,7 @@ export default function Form() {
     const [number, setNumber] = useState("")
     
 
+    const myArr = useSelector((state) => state.userData.arr)
     
     //console.log(myArr)
     const dispatch = useDispatch()
@@ -26,13 +27,13 @@ export default function Form() {
         setNumber("")
     }
 
-    const updateData = (key)=>{
-        dispatch(updateValue({key,inputtxt, lastName,address,email,number}))
-        setInputtxt("")
-        setLastName("")
-        setAddress("")
-        setEmail("")
-        setNumber("")
+    const updateData = ()=>{
+        dispatch(updateValue({inputtxt, lastName,address,email,number}))
+        setInputtxt(myArr.inputtxt)
+        setLastName(myArr.lastName)
+        setAddress(myArr.address)
+        setEmail(myArr.email)
+        setNumber(myArr.number)
     }
     
 
