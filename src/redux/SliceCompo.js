@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
     const initialState = {
-        arr: {
-            inputtxt:"",
+        formData: {
+            firstName:"",
             lastName:"",
             address:"",
             email:"",
@@ -16,26 +16,25 @@ export const SliceCompo = createSlice({
     initialState,
     reducers:{
         addValue : (state, {payload})=>{
-            state.arr.inputtxt = payload.inputtxt
-            state.arr.lastName = payload.lastName
-            state.arr.address = payload.address
-            state.arr.email = payload.email
-            state.arr.number = payload.number
+            state.formData.firstName = payload.firstName
+            state.formData.lastName = payload.lastName
+            state.formData.address = payload.address
+            state.formData.email = payload.email
+            state.formData.number = payload.number
         },
         deleteValue : (state, {payload}) =>{
-            console.log(payload)
-            state.arr.inputtxt = ""
-            state.arr.lastName = ""
-            state.arr.address = ""
-            state.arr.email = ""
-            state.arr.number = ""
+            state.formData.firstName = ""
+            state.formData.lastName = ""
+            state.formData.address = ""
+            state.formData.email = ""
+            state.formData.number = ""
         },
         updateValue: (state, {payload})=>{
-            state.arr.inputtxt = payload.inputtxt;
-            state.arr.lastName = payload.lastName;
-            state.arr.address = payload.address;
-            state.arr.email = payload.email;
-            state.arr.number = payload.number;
+            state.formData.firstName = payload.firstName;
+            state.formData.lastName = payload.lastName;
+            state.formData.address = payload.address;
+            state.formData.email = payload.email;
+            state.formData.number = payload.number;
         }
     }
 })
