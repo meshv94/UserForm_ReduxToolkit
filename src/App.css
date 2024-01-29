@@ -1,6 +1,9 @@
 *{
   box-sizing: border-box;
 }
+body{
+  background-color: #495057;
+}
 .App {
   text-align: center;
 }
@@ -45,6 +48,7 @@
   border: 2px solid rgba(37, 37, 37, 0.465);
   padding: 10px 20px;
   border-radius: 18px;
+  background-color: #343a40;
 }
 .user_content{
   display: flex;
@@ -53,4 +57,15 @@
 }
 .databox{
   width: 540px;
+  display: block;
+  margin: 0 auto;
+  background-color: #dee2e6;
+  border-radius: 18px;
+}
+
+.error_field{
+  display: none;
+  color: red;
+  font-size: 12px;
+  margin-top: 2px;
 }

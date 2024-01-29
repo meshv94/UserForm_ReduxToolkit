@@ -18,8 +18,12 @@ export default function Form() {
     const dispatch = useDispatch()
 
     const fnamefield = useRef();
+    const lnamefield = useRef();
     const phonefield = useRef();
     const cancleBtn = useRef();
+    const err_fname = useRef();
+    const err_lname = useRef();
+    const err_phone = useRef();
    // console.log(cancleBtn.current)
 
 
@@ -27,7 +31,17 @@ export default function Form() {
 
     const handleFormSubmit = (e)=>{
         e.preventDefault();
-        if(firstName.length >= 5 && /[0-9]{10}/.test(number)){
+
+        if((firstName.length >= 5 && firstName.length <= 10 ) === false){
+            err_fname.current.style.display = "block"
+            fnamefield.current.focus()
+        }else if((lastName.length >= 5 && lastName.length <= 10 ) === false){
+            err_lname.current.style.display = "block"
+            lnamefield.current.focus()
+        }else if((/^[789][0-9]{9}$/.test(number)) === false){
+            err_phone.current.style.display = "block"
+            phonefield.current.focus()
+        }else{
             dispatch(addValue({firstName, lastName,address,email,number}))
             setFirstName("")
             setLastName("")
@@ -35,15 +49,9 @@ export default function Form() {
             setEmail("")
             setNumber("")
             cancleBtn.current.setAttribute('disabled', true)
-        }else{
-            if((firstName.length >= 5) === false){
-                alert("Firstname must be at least 5 characters long")
-                fnamefield.current.focus()
-            }
-            if((/[0-9]{10}/.test(number)) === false){
-                alert("Phone must be of 10 digits")
-                phonefield.current.focus()
-            }
+            err_fname.current.style.display = "none"
+            err_lname.current.style.display = "none"
+            err_phone.current.style.display = "none"
         }
     }
 
@@ -57,16 +65,23 @@ export default function Form() {
         cancleBtn.current.removeAttribute("disabled")
     }
     
+    const clearFormData = ()=>{
+        setFirstName("")
+        setLastName("")
+        setAddress("")
+        setEmail("")
+        setNumber("")
+    }
 
     return (
         <>
-            <div className="form_box container form-box my-5">
+            <div className="form_box container form-box my-4">
 
                 <form action="" className="row g-3" onSubmit={handleFormSubmit}>
                     <div className="row g-3">
                         <div className="col">
                             <input
-                                onChange={(event)=> setFirstName(event.target.value)}
+                                onChange={(event)=> setFirstName(event.target.value.trim())}
                                 value={firstName}
                                 type="text"
                                 required
@@ -75,52 +90,72 @@ export default function Form() {
                                 placeholder="First name"
                                 aria-label="First name"
                             />
+                            <div className='error_field' id='error_fname' ref={err_fname}>
+                                firstname must be atleast 5 characters long and atmost contains 10 characters
+                            </div>
                         </div>
                         <div className="col">
                             <input
-                                onChange={(event)=> setLastName(event.target.value)}
+                            ref={lnamefield}
+                                onChange={(event)=> setLastName(event.target.value.trim())}
                                 value={lastName}
                                 type="text"
                                 className="form-control"
                                 placeholder="Last name"
                                 aria-label="Last name"
                             />
+                            <div className='error_field' id='error_lname' ref={err_lname}>
+                                lastname must be atleast 5 characters long and atmost contains 10 characters
+                            </div>
                         </div>
 
                     </div>
-                    <div className="col-12">
+
+                    <div className="row g-3">
+                        <div className="col">
                         <input
-                        onChange={(event)=> setAddress(event.target.value)}
-                        value={address}
-                            type="text"
-                            className="form-control my-3"
-                            id="inputAddress"
-                            placeholder="Address"
-                        />
-                    </div>
-                    <div className="col-md-6 my-2">
-                        <input
-                            onChange={(event)=> setEmail(event.target.value)}
+                            onChange={(event)=> setEmail(event.target.value.trim())}
                             value={email}
                             type="email"
                             required
-                            className="form-control my-2"
+                            className="form-control"
                             id="inputEmail4"
                             placeholder="Email"
                         />
+                        </div>
+                        <div className="col">
                         <input
                             onChange={(event)=> setNumber(event.target.value)}
                             value={number}
                             ref={phonefield}
                             type="number"
-                            className="form-control my-2"
+                            className="form-control"
                             id="number"
                             placeholder="Phone"
                         />
+                        <div className='error_field' id='error_phone' ref={err_phone}>
+                                please enter valid phone number
+                            </div>
+                        </div>
                     </div>
+
+                    <div className="row g-3">
+                        <div className="col">
+                        <input
+                        onChange={(event)=> setAddress(event.target.value.trim())}
+                        value={address}
+                            type="text"
+                            className="form-control my-1"
+                            id="inputAddress"
+                            placeholder="Address"
+                        />
+                        </div>
+                    </div>
+
                     <div className="btn-group">
                         <button type="submit" defaultValue="Submit" className='my-3 mx-3 btn btn-primary'>Submit</button>
-                        <button ref={cancleBtn} type="cancle" id="canclebtn" className='my-3 btn btn-dark' disabled>Cancel</button>
+                        <button type="clear" id="clearBtn" className='my-3 btn btn-danger' onClick={()=>{clearFormData()}}>Clear</button>
+                        <button ref={cancleBtn} type="cancle" id="canclebtn" className='my-3 mx-3 btn btn-dark' disabled>Cancel</button>
                     </div>
                 </form>
             </div>
